@@ -9,4 +9,9 @@ body {
 * {
     box-sizing: border-box;
     font-family: 'Cabin', sans-serif;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: color;
+    align-items: center;
 }
