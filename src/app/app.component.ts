@@ -138,7 +138,7 @@ export class AppComponent {
       if (!this.breakAnimation) {
         this.changeImage(that);
       }
-    }, 5000);
+    }, 10000);
   }
 
   changeImageManually(text: string) {
