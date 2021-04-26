@@ -8,7 +8,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: color;
-    padding: 8pc 0pc;
+    align-items: center;
 }
 
 canvas {
