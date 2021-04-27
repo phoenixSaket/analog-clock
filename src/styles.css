@@ -4,6 +4,7 @@ html,
 body {
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 * {
@@ -14,4 +15,16 @@ body {
     background-size: cover;
     background-blend-mode: color;
     align-items: center;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+html,
+body {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }

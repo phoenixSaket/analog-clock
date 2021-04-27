@@ -28,6 +28,16 @@ export class AppComponent {
   image = this.images[this.currentImage];
   breakAnimation: boolean = false;
   settingsClicked: boolean = false;
+  isSideOpen: boolean = false;
+  selectedCity: string = "";
+
+
+
+
+
+
+
+
 
   ngOnInit() {
     var canvas = <HTMLCanvasElement>document.getElementById("canvas");
@@ -171,6 +181,15 @@ export class AppComponent {
 
   settingsClick() {
     this.settingsClicked = !this.settingsClicked;
+    let side = document.getElementById("side-nav");
+    if (this.isSideOpen) {
+      side.classList.remove("show-side");
+      side.classList.add("hide-side");
+    } else {
+      side.classList.add("show-side");
+      side.classList.remove("hide-side");
+    }
+    this.isSideOpen = !this.isSideOpen;
   }
 
   changeAnimation() {
@@ -178,5 +197,13 @@ export class AppComponent {
     if (!this.breakAnimation) {
       this.changeImage(this);
     }
+  }
+
+  updateCity(event : any) {
+    this.selectedCity = event.target.value;
+  }
+
+  selectImage(image) {
+    this.image = image;
   }
 }

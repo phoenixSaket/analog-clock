@@ -9,6 +9,7 @@
     background-size: cover;
     background-blend-mode: color;
     align-items: center;
+    background-attachment: fixed;
 }
 
 canvas {
@@ -126,4 +127,135 @@ canvas {
         display: none;
         opacity: 0;
     }
+}
+
+.overlay-side {
+    position: absolute;
+    right: -500px;
+    top: 0;
+    color: black;
+    z-index: 50000;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 1;
+    /* min-width: 300px; */
+    width: 100%;
+    max-width: 500px;
+}
+
+.show-side {
+    animation: show-side 0.5s ease-in;
+    right: 0;
+}
+
+.hide-side {
+    animation: hide-side 0.5s ease-out;
+    right: -500px;
+}
+
+@keyframes show-side {
+    0% {
+        right: -500px;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes hide-side {
+    0% {
+        right: 0;
+    }
+    100% {
+        right: -500px;
+    }
+}
+
+.title {
+    text-transform: uppercase;
+    letter-spacing: 20px;
+    font-size: 45px;
+}
+
+.mini-title {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 15px;
+}
+
+.side-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    /* height: 100%; */
+}
+
+.right-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 60px 60px 0;
+}
+
+.w-60 {
+    width: 60% !important;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.margin-b10 {
+    margin-bottom: 10px;
+}
+
+.thumbnail {
+    width: 75px;
+    height: auto;
+    margin: 2px;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.image-container {
+    width: fit-content !important;
+}
+
+.selected-image {
+    width: auto;
+    height: 200px;
+    min-width: 100%;
+    margin-bottom: 10px;
+}
+
+.content {
+    margin-top: 20px;
+}
+
+mat-expansion-panel {
+    width: 450px !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.single-line {
+    display: inline;
+}
+
+.mini-bg {
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px black;
 }

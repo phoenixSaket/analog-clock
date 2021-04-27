@@ -12,27 +12,81 @@
             <div class="d-flex">
                 <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'">
                     <!-- <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
-                    <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
+                    <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
                 </div>
 
                 <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()">settings</span>
 
-                <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'">
-                    <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span>
-                    <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
-                </div>
+                <!-- <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'"> -->
+                <!-- <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
+                <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
+                <!-- </div> -->
             </div>
-            <span class="material-icons pointer active-settings" *ngIf="this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">play_arrow</span>
-            <span class="material-icons pointer active-settings" *ngIf="!this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">pause</span>
+            <!-- <span class="material-icons pointer active-settings" *ngIf="this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">play_arrow</span>
+            <span class="material-icons pointer active-settings" *ngIf="!this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">pause</span> -->
 
         </div>
 
     </div>
-    <!-- <span class="overlay white right" (click)="changeImageManually('next')">Next</span> -->
-    <!-- <span class="overlay white left" (click)="changeImageManually('previous')">Previous</span> -->
-    <script>
-    </script>
+    <div class="overlay-side" id="side-nav">
+        <div class="side-container">
+            <!-- <div class="title">Settings</div> -->
+            <div class="content">
 
+
+
+                <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span class="mini-title">Weather</span>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <span [innerHTML]="this.selectedCity.length > 0 ? this.selectedCity : 'Select your city'"></span>
+                                <!-- <mat-icon>account_circle</mat-icon> -->
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-form-field>
+                            <mat-label>City</mat-label>
+                            <input type="text" matInput [value]="this.selectedCity" (change)="updateCity($event)">
+                        </mat-form-field>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span class="mini-title">Auto Background</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-slide-toggle class="" checked="true">
+                            <span>Auto Change Background</span>
+                        </mat-slide-toggle>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span class="mini-title">Background</span>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Select a background image
+                                <!-- <mat-icon>account_circle</mat-icon> -->
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div class="grid-box">
+                            <img class="selected-image" [src]="this.image" alt="selected">
+                            <div class="single-line">
+                                <img class="thumbnail pointer" *ngFor="let image of this.images" [src]="image" (click)="selectImage(image)" alt="background">
+                            </div>
+                            <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
+                            <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span>
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()">close</span>
+    </div>
 </body>
 
 </html>
