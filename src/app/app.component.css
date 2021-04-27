@@ -171,6 +171,12 @@ canvas {
     right: -500px;
 }
 
+.toggle-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
 @keyframes show-side {
     0% {
         right: -500px;
