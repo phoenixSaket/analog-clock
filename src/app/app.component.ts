@@ -59,27 +59,41 @@ export class AppComponent {
       ctx.beginPath();
       ctx.arc(0, 0, radius * 0.05, 0, 2 * Math.PI);
       // ctx.fillStyle = '#749C75';
-      ctx.fillStyle = '#121212';
+      ctx.fillStyle = '#4545458d';
       ctx.fill();
     }
 
     function drawNumbers(ctx, radius) {
       var ang;
       var num;
-      ctx.font = radius * 0.05 + "px arial";
+      ctx.font = radius * 0.15 + "px arial";
       ctx.textBaseline = "middle";
       ctx.textAlign = "center";
+      for (num = 1; num < 61; num++) {
+        ang = num * Math.PI / 30;
+        ctx.rotate(ang);
+        ctx.translate(0, -radius * 0.85);
+        ctx.rotate(-ang);
+        // ctx.fillText(num.toString(), 0, 0);
+        if (num % 5 !== 0) { ctx.fillText("·", 0, 0); }
+        ctx.rotate(ang);
+        ctx.translate(0, radius * 0.85);
+        ctx.rotate(-ang);
+      }
+      ctx.fillStyle = '#000';
+      ctx.font = radius * 0.1 + "px Cabin";
       for (num = 1; num < 13; num++) {
         ang = num * Math.PI / 6;
         ctx.rotate(ang);
         ctx.translate(0, -radius * 0.85);
         ctx.rotate(-ang);
         // ctx.fillText(num.toString(), 0, 0);
-        ctx.fillText("*", 0, 0);
+        ctx.fillText(num.toString(), 0, 0);
         ctx.rotate(ang);
         ctx.translate(0, radius * 0.85);
         ctx.rotate(-ang);
       }
+      ctx.fill();
     }
 
     function drawTime(ctx, radius) {
@@ -161,7 +175,7 @@ export class AppComponent {
 
   changeAnimation() {
     this.breakAnimation = !this.breakAnimation;
-    if(!this.breakAnimation) {
+    if (!this.breakAnimation) {
       this.changeImage(this);
     }
   }
