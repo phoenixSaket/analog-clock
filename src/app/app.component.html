@@ -85,7 +85,7 @@
                 </mat-accordion>
             </div>
         </div>
-        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()">close</span>
+        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()" [innerHTML]="this.settingsClicked ? 'close' : 'settings'"></span>
     </div>
 </body>
 

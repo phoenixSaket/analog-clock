@@ -5,6 +5,11 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: color;
+    background-attachment: fixed;
 }
 
 * {
