@@ -22,7 +22,8 @@
                     <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
                 </div>
             </div>
-            <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">play_arrow</span>
+            <span class="material-icons pointer active-settings" *ngIf="this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">play_arrow</span>
+            <span class="material-icons pointer active-settings" *ngIf="!this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">pause</span>
 
         </div>
 

@@ -33,7 +33,7 @@ canvas {
 .white {
     color: white;
     text-transform: uppercase;
-    padding: 2pc;
+    /* padding: 2pc; */
     font-size: 20px;
     opacity: 0.5;
     text-shadow: 0px 0px 5px black;
@@ -60,6 +60,7 @@ canvas {
     align-items: center;
     width: 100px;
     flex-direction: column;
+    margin: 10px 25px;
 }
 
 .d-flex {
@@ -95,10 +96,14 @@ canvas {
 .material-icons {
     font-size: 30px;
     margin: 10px 10px;
+    z-index: 5000;
 }
 
 .settings {
     opacity: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 @keyframes show {
