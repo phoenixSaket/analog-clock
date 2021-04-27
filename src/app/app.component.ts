@@ -138,24 +138,31 @@ export class AppComponent {
       if (!this.breakAnimation) {
         this.changeImage(that);
       }
-    }, 10000);
+    }, 30000);
   }
 
   changeImageManually(text: string) {
     console.log("Image Change : ", text)
     this.breakAnimation = true;
     if (text == "next") {
-      this.currentImage = this.currentImage + 1;
+      this.currentImage = this.currentImage < this.images.length - 1 ? this.currentImage + 1 : 0;
       this.image = this.images[this.currentImage];
     }
 
     if (text == "previous") {
-      this.currentImage = this.currentImage - 1;
+      this.currentImage = this.currentImage == 0 ? this.images.length - 1 : this.currentImage - 1;
       this.image = this.images[this.currentImage];
     }
   }
 
   settingsClick() {
     this.settingsClicked = !this.settingsClicked;
+  }
+
+  changeAnimation() {
+    this.breakAnimation = !this.breakAnimation;
+    if(!this.breakAnimation) {
+      this.changeImage(this);
+    }
   }
 }

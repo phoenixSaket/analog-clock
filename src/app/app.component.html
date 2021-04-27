@@ -9,19 +9,23 @@
     <div class="settings overlay white right ">
         <div class="icon-container">
 
-            <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'">
-                <!-- <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
-                <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
-            </div>
+            <div class="d-flex">
+                <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'">
+                    <!-- <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
+                    <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
+                </div>
 
-            <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()">settings</span>
+                <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()">settings</span>
 
-            <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'">
-                <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span>
-                <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
+                <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'">
+                    <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span>
+                    <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
+                </div>
             </div>
+            <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">play_arrow</span>
 
         </div>
+
     </div>
     <!-- <span class="overlay white right" (click)="changeImageManually('next')">Next</span> -->
     <!-- <span class="overlay white left" (click)="changeImageManually('previous')">Previous</span> -->
