@@ -3,7 +3,7 @@
 
 <body>
     <div class="container">
-        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick($event)" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity"></app-side>
+        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick($event)" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity" [weatherData]="this.weatherData"></app-side>
         <canvas id="canvas" width="400px" height="400px"></canvas>
     </div>
     <div class="settings overlay">
@@ -45,12 +45,14 @@
                                 <span class="mini-title">Auto Change Background</span>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <mat-slide-toggle (click)="changeAnimation()" [checked]="true">
-                            <span>Auto Change Background</span>
-                        </mat-slide-toggle>
-                        <mat-slide-toggle (click)="this.showSideClick()" [checked]="false">
-                            <span>Side</span>
-                        </mat-slide-toggle>
+                        <div class="toggle-container">
+                            <mat-slide-toggle (click)="changeAnimation()" [checked]="true">
+                                <span>Auto Change Background</span>
+                            </mat-slide-toggle>
+                            <mat-slide-toggle (click)="this.showSideClick()" [checked]="false">
+                                <span>Show Side</span>
+                            </mat-slide-toggle>
+                        </div>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>

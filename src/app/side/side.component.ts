@@ -16,6 +16,17 @@ export class SideComponent implements OnInit {
   progress: number;
   weatherData: any;
   weatherError: any;
+  isForecast: boolean = false;
+  forecast = [];
+  type: string;
+  data: {
+    labels: any[]; datasets: {
+      label: string;
+      // data: [65, 59, 80, 81, 56, 55, 65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55]
+      data: any[];
+    }[];
+  };
+  options: { responsive: boolean; maintainAspectRatio: boolean; };
 
   constructor(private service: WeatherServiceService) { }
 
@@ -59,5 +70,43 @@ export class SideComponent implements OnInit {
   settingsClicked() {
     this.settingsClick.emit(true);
   }
+
+
+
+
+  getLabels() {
+    let labels = [];
+    for (let i = 10; i <= 11; i++) {
+      labels.push(i + " AM");
+    }
+    labels.push("12 PM")
+    for (let i = 1; i <= 9; i++) {
+      labels.push(i + " PM");
+    }
+    return labels;
+  }
+
+  getForecastClick() {
+    this.forecast = this.service.getForecastArray();
+    this.isForecast = true;
+
+    this.type = 'line';
+    this.data = {
+      labels: this.getLabels(),
+      datasets: [
+        {
+          label: "Forecast",
+          // data: [65, 59, 80, 81, 56, 55, 65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55]
+          data: this.forecast
+        }
+      ]
+    };
+    this.options = {
+      responsive: true,
+      maintainAspectRatio: false
+    };
+  }
+
+
 
 }

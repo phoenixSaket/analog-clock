@@ -102,6 +102,11 @@ canvas {
     align-items: flex-end;
 }
 
+.toggle-container {
+    display: flex;
+    flex-direction: column;
+}
+
 @keyframes show {
     from {
         display: none;

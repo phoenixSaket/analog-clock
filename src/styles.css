@@ -41,3 +41,7 @@ body {
 .w-100 {
     width: 100%;
 }
+
+.mat-expansion-panel-body {
+    width: 100% !important;
+}

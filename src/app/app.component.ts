@@ -47,7 +47,7 @@ export class AppComponent {
   weatherErrorText: string = "";
   weatherData: any;
   city: string = "";
-  showSide = false;
+  showSide = true;
 
 
 
@@ -232,6 +232,7 @@ export class AppComponent {
         this.weatherErrorText = "City Found : ";
         this.city = data?.location?.name;
         this.weatherData = data;
+        this.service.setForecastArray(data.forecast.forecastday[0].hour);
       },
       (error: any) => {
         console.log("Error", error);

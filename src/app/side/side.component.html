@@ -21,7 +21,18 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="weather-container">
-                        <img [src]="this.weatherData?.current?.condition?.icon" alt="this.weatherData?.current?.condition?.text">
+                        <img [src]="this.weatherData?.current?.condition?.icon" [alt]="this.weatherData?.current?.condition?.text">
+                        <div class="weather-container-inner">
+                            <span class="mini-heading">
+                                {{this.weatherData?.current?.temp_c}} °C
+                            </span>
+                            <span class="mini-heading">
+                                Feels like {{this.weatherData?.current?.feelslike_c}} °C
+                            </span>
+                            <span class="mini-heading">
+                                {{this.weatherData?.location?.name}} , {{this.weatherData?.location?.region}} , {{this.weatherData?.location?.country}} 
+                            </span>
+                        </div>
                     </div>
                 </mat-expansion-panel>
                 <mat-expansion-panel>
@@ -30,6 +41,12 @@
                             <span class="mini-title black">Forecast</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <div *ngIf="this.isForecast">
+                        <chart [type]="this.type" [data]="this.data" [options]="this.options"></chart>
+                    </div>
+                    <div *ngIf="!this.isForecast">
+                        <button mat-raised-button (click)="getForecastClick()">Get Data</button>
+                    </div>
                 </mat-expansion-panel>
                 <!-- <mat-expansion-panel>
                     <mat-expansion-panel-header>
