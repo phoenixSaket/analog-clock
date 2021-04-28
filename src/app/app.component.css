@@ -169,6 +169,7 @@ canvas {
 .hide-side {
     animation: hide-side 0.5s ease-out;
     right: -500px;
+    display: none;
 }
 
 .toggle-container {
