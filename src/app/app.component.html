@@ -3,38 +3,19 @@
 
 <body>
     <div class="container">
-        <app-side name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity"></app-side>
+        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick($event)" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity"></app-side>
         <canvas id="canvas" width="400px" height="400px"></canvas>
     </div>
-    <div class="white right ">
+    <div class="settings overlay">
         <div class="icon-container">
-
             <div class="d-flex">
-                <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'">
-                    <!-- <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
-                    <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
-                </div>
-
-                <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()">settings</span>
-
-                <!-- <div class="other-icons non-active-settings" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'"> -->
-                <!-- <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
-                <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span> -->
-                <!-- </div> -->
+                <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick($event)">settings</span>
             </div>
-            <!-- <span class="material-icons pointer active-settings" *ngIf="this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">play_arrow</span>
-            <span class="material-icons pointer active-settings" *ngIf="!this.breakAnimation" [ngClass]="this.settingsClicked ? 'show-settings' : 'hide-settings'" (click)="changeAnimation()">pause</span> -->
-
         </div>
-
     </div>
     <div class="overlay-side" id="side-nav">
         <div class="side-container">
-            <!-- <div class="title">Settings</div> -->
             <div class="content">
-
-
-
                 <mat-accordion class="example-headers-align" multi>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
@@ -64,8 +45,11 @@
                                 <span class="mini-title">Auto Change Background</span>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <mat-slide-toggle (click)="changeAnimation()" [checked]="!this.breakAnimation ? true : false">
+                        <mat-slide-toggle (click)="changeAnimation()" [checked]="true">
                             <span>Auto Change Background</span>
+                        </mat-slide-toggle>
+                        <mat-slide-toggle (click)="this.showSideClick()" [checked]="false">
+                            <span>Side</span>
                         </mat-slide-toggle>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
@@ -109,7 +93,7 @@
                 </mat-accordion>
             </div>
         </div>
-        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()" [innerHTML]="this.settingsClicked ? 'close' : 'settings'"></span>
+        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick($event)" [innerHTML]="this.settingsClicked ? 'close' : 'settings'"></span>
     </div>
 </body>
 

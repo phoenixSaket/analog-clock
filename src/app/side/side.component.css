@@ -1,4 +1,87 @@
-mat-accordion {
-    z-index: 5550000000000000;
-    position: relative;
+.mat-expansion-panel {
+    background: transparent !important;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.height-scroll {
+    max-height: 80vh;
+    overflow-y: auto;
+    /* display: flex; */
+    justify-content: center;
+    box-shadow: 0px 0px 20px black;
+    /* margin-right: 30px; */
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.height-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+.height-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.main-display {
+    height: 150px;
+    width: 400px;
+}
+
+.outer-container {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px black;
+    margin: 10px;
+}
+
+.mini-title {
+    text-transform: capitalize;
+    color: white;
+    font-size: 25px;
+    letter-spacing: 1.5px;
+    padding: 2px;
+    text-shadow: 1px 1px 3px black;
+    line-height: 45px;
+}
+
+.black {
+    color: black;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 0px #00000000;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-expansion-panel-body {
+    width: 100% !important;
+}
+
+.main-display-mini {
+    width: 350px;
+}
+
+@media (max-width: 500) {
+    .height-scroll {
+        display: none;
+    }
 }

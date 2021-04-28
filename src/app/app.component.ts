@@ -47,6 +47,7 @@ export class AppComponent {
   weatherErrorText: string = "";
   weatherData: any;
   city: string = "";
+  showSide = false;
 
 
 
@@ -197,7 +198,7 @@ export class AppComponent {
     }
   }
 
-  settingsClick() {
+  settingsClick(event) {
     this.settingsClicked = !this.settingsClicked;
     let side = document.getElementById("side-nav");
     if (this.isSideOpen) {
@@ -247,5 +248,9 @@ export class AppComponent {
 
   selectAvatar(image) {
     this.selectedAvatar = image;
+  }
+
+  showSideClick() {
+    this.showSide = !this.showSide;
   }
 }

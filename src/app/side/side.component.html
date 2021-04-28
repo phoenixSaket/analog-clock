@@ -1,40 +1,60 @@
-<mat-accordion multi>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <span class="mini-title">Hello {{this.name}}</span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <img [src]="this.avatar" alt="avatar" />
-        <mat-accordion multi>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="mini-title">Weather</span>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="mini-title">Auto Change Background</span>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="mini-title">Background</span>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <span class="mini-title">Avatar</span>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </mat-expansion-panel>
-</mat-accordion>
+<div class="height-scroll">
+    <mat-accordion multi>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header class="main-display">
+                <mat-panel-title class="row">
+                    <div class="outer-container">
+                        <img [src]="this.avatar" class="avatar" alt="avatar" />
+                        <div class="inner-container">
+                            <span class="mini-title">{{this.message}}</span>
+                        </div>
+                    </div>
+                    <mat-progress-bar mode="determinate" [value]="this.progress"></mat-progress-bar>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-accordion multi>
+                <mat-expansion-panel class="main-display-mini">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="mini-title black">Weather</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="weather-container">
+                        <img [src]="this.weatherData?.current?.condition?.icon" alt="this.weatherData?.current?.condition?.text">
+                    </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="mini-title black">Forecast</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                </mat-expansion-panel>
+                <!-- <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="mini-title black">Background</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="mini-title black">Avatar</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                </mat-expansion-panel> -->
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="mini-title black">Settings</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <span class="material-icons pointer active-settings" (click)="settingsClicked()">settings</span>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
