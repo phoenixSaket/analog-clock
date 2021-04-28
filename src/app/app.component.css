@@ -2,7 +2,7 @@
     display: flex;
     /* width: 100vw; */
     height: 100vh;
-    justify-content: center;
+    justify-content: space-around;
     /* background-color: white; */
     background-position: center;
     background-repeat: no-repeat;
@@ -16,8 +16,8 @@ canvas {
     opacity: 0.8;
     box-shadow: 0px 0px 15px black;
     border-radius: 50%;
-    z-index: 2;
-    position: absolute;
+    z-index: 20;
+    /* position: absolute; */
 }
 
 .overlay {
@@ -163,13 +163,16 @@ canvas {
 
 .show-side {
     animation: show-side 0.5s ease-in;
+    display: block;
     right: 0;
+    width: 500px;
 }
 
 .hide-side {
-    animation: hide-side 0.5s ease-out;
+    /* display: none; */
+    animation: hide-side 0.5s ease-in;
     right: -500px;
-    display: none;
+    width: 0px;
 }
 
 .toggle-container {
@@ -194,14 +197,11 @@ canvas {
 @keyframes hide-side {
     0% {
         right: 0;
-        display: block;
-    }
-    90% {
-        display: block;
+        width: 500px;
     }
     100% {
         right: -500px;
-        display: none;
+        width: 0;
     }
 }
 
@@ -254,6 +254,16 @@ canvas {
     align-items: center;
 }
 
+.thumbnail-avatar {
+    width: 70px;
+    height: auto;
+    margin: 5px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px black;
+    justify-content: center;
+    align-items: center;
+}
+
 .grid-box {
     display: flex;
     flex-wrap: wrap;
@@ -269,6 +279,14 @@ canvas {
     height: 200px;
     min-width: 100%;
     margin-bottom: 10px;
+}
+
+.selected-avatar {
+    width: auto;
+    height: 200px;
+    margin: 10px 0px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px black;
 }
 
 .content {
@@ -287,8 +305,32 @@ mat-expansion-panel {
     display: inline;
 }
 
+.single-line-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .mini-bg {
     background-color: white;
     border-radius: 50%;
     box-shadow: 0px 0px 5px black;
+}
+
+.weather-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.invalid {
+    color: red;
+}
+
+.bold {
+    font-weight: 800;
+}
+
+.success {
+    color: darkgreen;
 }

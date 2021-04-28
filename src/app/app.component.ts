@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WeatherServiceService } from './weather-service.service';
 
 @Component({
   selector: 'app-root',
@@ -24,22 +25,39 @@ export class AppComponent {
     "https://images.pexels.com/photos/247478/pexels-photo-247478.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
     "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   ];
+  avatars = [
+    "assets/Avatars/avatar-1.png",
+    "assets/Avatars/avatar-2.png",
+    "assets/Avatars/avatar-3.png",
+    "assets/Avatars/avatar-4.png",
+    "assets/Avatars/avatar-5.png",
+    "assets/Avatars/avatar-6.png",
+    "assets/Avatars/avatar-7.png",
+    "assets/Avatars/avatar-8.png",
+    "assets/Avatars/avatar-9.png",
+  ];
+  selectedAvatar = "assets/Avatars/avatar-1.png";
   currentImage: number = 0;
   image = this.images[this.currentImage];
   breakAnimation: boolean = false;
   settingsClicked: boolean = false;
   isSideOpen: boolean = false;
   selectedCity: string = "";
+  weatherError: boolean = false;
+  weatherErrorText: string = "";
+  weatherData: any;
+  city: string = "";
 
 
 
-
-
-
-
+  constructor(private service: WeatherServiceService) {
+  }
 
 
   ngOnInit() {
+    this.selectedCity = "Paratwada";
+    this.getWeatherData();
+    
     var canvas = <HTMLCanvasElement>document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     var radius = canvas.height / 2;
@@ -145,7 +163,7 @@ export class AppComponent {
     }
 
     this.changeImage(this);
-
+    
   }
 
 
@@ -199,11 +217,35 @@ export class AppComponent {
     }
   }
 
-  updateCity(event : any) {
+  updateCity(event: any) {
+    console.log("Weather")
     this.selectedCity = event.target.value;
+    this.getWeatherData();
+  }
+
+  getWeatherData() {
+    this.service.getWeather(this.selectedCity).subscribe(
+      (data: any) => {
+        console.log("Data", data);
+        this.weatherError = false;
+        this.weatherErrorText = "City Found : ";
+        this.city = data?.location?.name;
+        this.weatherData = data;
+      },
+      (error: any) => {
+        console.log("Error", error);
+        this.weatherError = true;
+        this.weatherErrorText = "Unable to find City";
+        this.city = "";
+      }
+    )
   }
 
   selectImage(image) {
     this.image = image;
+  }
+
+  selectAvatar(image) {
+    this.selectedAvatar = image;
   }
 }
