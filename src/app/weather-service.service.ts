@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class WeatherServiceService {
 
   private http: HttpClient;
-  url: string = "http://api.weatherapi.com/v1/forecast.json?key=1986480656ec490d950204923202611&q="
+  url: string = "https://api.weatherapi.com/v1/forecast.json?key=1986480656ec490d950204923202611&q="
 
   // http://api.weatherapi.com/v1/forecast.json?key=1986480656ec490d950204923202611&q=${location}
   constructor(http: HttpClient) {
