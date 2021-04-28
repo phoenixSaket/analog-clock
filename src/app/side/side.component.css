@@ -121,3 +121,20 @@
 .margin-t-20 {
     margin-top: 20px;
 }
+
+.right-align {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.total-cases {
+    font-weight: 800;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+}

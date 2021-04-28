@@ -57,20 +57,60 @@
                         </div>
                     </div>
                 </mat-expansion-panel>
-                <!-- <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <span class="mini-title black">Background</span>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                </mat-expansion-panel>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <span class="mini-title black">Avatar</span>
+                            <span class="mini-title black">Covid 19</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                </mat-expansion-panel> -->
+                    <div class="covid-container-outer">
+                        <div class="covid-container">
+                            <div class="box">
+                                <span class="total-cases">Total Cases</span>
+                                <span>{{this.covidData?.cases}}</span>
+                            </div>
+                            <div class="box">
+                                <span class="total-cases">Total Recovered</span>
+                                <span>{{this.covidData?.recovered}}</span>
+                            </div>
+                            <div class="box">
+                                <span class="total-cases">Total Deaths</span>
+                                <span>{{this.covidData?.deaths}}</span>
+                            </div>
+                            <div class="box">
+                                <span class="total-cases">Recovery Rate</span>
+                                <span>{{this.covidData?.recovered * 100 / this.covidData?.cases}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <span class="w-100 right-align">Daily Update</span>
+                        <hr>
+
+                        <div class="covid-container">
+                            <div class="box">
+                                <span class="total-cases">Cases</span>
+                                <span>{{this.covidData?.todayCases}}</span>
+                            </div>
+                            <div class="box">
+                                <span class="total-cases">Recovered</span>
+                                <span>{{this.covidData?.todayRecovered}}</span>
+                            </div>
+                            <div class="box">
+                                <span class="total-cases">Deaths</span>
+                                <span>{{this.covidData?.todayDeaths}}</span>
+                            </div>
+                            <div class="box">
+                                <span class="total-cases">Recovery Rate</span>
+                                <span>{{this.covidData?.todayRecovered * 100 / this.covidData?.todayCases}}</span>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button mat-fab color="primary" class="side-settings" (click)="getCovidData()">
+                                <span class="material-icons">sync</span>
+                            </button>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
                 <div class="button-container">
                     <button mat-fab color="primary" class="side-settings" (click)="settingsClicked()">
                         <span class="material-icons pointer" >settings</span>

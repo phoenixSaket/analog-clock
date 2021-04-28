@@ -31,7 +31,7 @@ export class AppComponent {
   weatherErrorText: string = "";
   weatherData: any;
   city: string = "";
-  showSide = false;
+  showSide = true;
 
 
 

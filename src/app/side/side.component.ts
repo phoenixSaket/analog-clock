@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { CovidService } from '../covid.service';
 import { WeatherServiceService } from '../weather-service.service';
 
 @Component({
@@ -29,8 +30,9 @@ export class SideComponent implements OnInit {
   };
   hasWeatherData: boolean = false;
   options: { responsive: boolean; maintainAspectRatio: boolean; };
+  covidData: any;
 
-  constructor(private service: WeatherServiceService) { }
+  constructor(private service: WeatherServiceService, private covid: CovidService) { }
 
   ngOnInit(): void {
     this.getMessage(this);
@@ -119,6 +121,15 @@ export class SideComponent implements OnInit {
     let data: any = this.service.getCurrentData();
     this.weatherData = data;
     this.hasWeatherData = true;
+  }
+
+  getCovidData() {
+    this.covid.getCovidData().subscribe(
+      (data) => {
+        console.log(data);
+        this.covidData = data;
+      }, (error) => { console.log(error); }
+    )
   }
 
 }
