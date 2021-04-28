@@ -22,8 +22,7 @@
                             <mat-panel-title>
                                 <span class="mini-title">Weather</span>
                             </mat-panel-title>
-                            <span class="material-icons" [ngClass]="this.weatherError ? 'invalid' : 'success'">
-                                verified
+                            <span class="material-icons" [ngClass]="this.weatherError ? 'invalid' : 'success'" [innerHTML]="this.weatherError ? 'report_gmailerrorred' : 'verified'">
                             </span>
                             <!-- <mat-panel-description>
                                 <span [innerHTML]="this.selectedCity.length > 0 ? this.selectedCity : 'Select your city'"></span>
@@ -42,16 +41,20 @@
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <span class="mini-title">Auto Change Background</span>
+                                <span class="mini-title">settings</span>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <div class="toggle-container">
-                            <mat-slide-toggle (click)="changeAnimation()" [checked]="true">
+                            <div class="toggle-box">
                                 <span>Auto Change Background</span>
-                            </mat-slide-toggle>
-                            <mat-slide-toggle (click)="this.showSideClick()" [checked]="false">
-                                <span>Show Side</span>
-                            </mat-slide-toggle>
+                                <span class="material-icons colored-toogle pointer" (click)="changeAnimation()" [innerHTML]="!this.breakAnimation ? 'toggle_on' : 'toggle_off'" [style.color]="!this.breakAnimation ? '#3F51B5' : '#9e9e9e'">
+                            </span>
+                            </div>
+                            <div class="toggle-box">
+                                <span>Show Information</span>
+                                <span class="material-icons colored-toogle pointer" (click)="this.showSideClick()" [innerHTML]="this.showSide ? 'toggle_on' : 'toggle_off'" [style.color]="this.showSide ? '#3F51B5' : '#9e9e9e'">
+                            </span>
+                            </div>
                         </div>
                     </mat-expansion-panel>
                     <mat-expansion-panel>

@@ -8,23 +8,7 @@ import { WeatherServiceService } from './weather-service.service';
 })
 export class AppComponent {
   title = 'analog-clock';
-  images = [
-    "https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/2835436/pexels-photo-2835436.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/2748716/pexels-photo-2748716.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/1647962/pexels-photo-1647962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/1631677/pexels-photo-1631677.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/2739013/pexels-photo-2739013.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/2341830/pexels-photo-2341830.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-    "https://images.pexels.com/photos/797797/pexels-photo-797797.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/589810/pexels-photo-589810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/358532/pexels-photo-358532.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    "https://images.pexels.com/photos/247478/pexels-photo-247478.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-    "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-  ];
+  images = [];
   avatars = [
     "assets/Avatars/avatar-1.png",
     "assets/Avatars/avatar-2.png",
@@ -47,7 +31,7 @@ export class AppComponent {
   weatherErrorText: string = "";
   weatherData: any;
   city: string = "";
-  showSide = true;
+  showSide = false;
 
 
 
@@ -58,6 +42,10 @@ export class AppComponent {
   ngOnInit() {
     this.selectedCity = "Paratwada";
     this.getWeatherData();
+
+    for(let i = 1; i <= 18; i++ ) {
+      this.images.push("assets/Images/bg-"+i+".jpeg");      
+    }
     
     var canvas = <HTMLCanvasElement>document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
@@ -185,8 +173,6 @@ export class AppComponent {
   }
 
   changeImageManually(text: string) {
-    console.log("Image Change : ", text)
-    this.breakAnimation = true;
     if (text == "next") {
       this.currentImage = this.currentImage < this.images.length - 1 ? this.currentImage + 1 : 0;
       this.image = this.images[this.currentImage];
@@ -232,7 +218,18 @@ export class AppComponent {
         this.weatherErrorText = "City Found : ";
         this.city = data?.location?.name;
         this.weatherData = data;
-        this.service.setForecastArray(data.forecast.forecastday[0].hour);
+        this.service.setCurrentData(
+          {
+            "condition":data.current.condition,
+            "temp": data.current.temp_c,
+            "feelsLike": data.current.feelslike_c,
+            "location": {
+              "country": data.location.country,
+              "region": data.location.region,
+              "name": data.location.name
+            }
+        })
+        this.service.setForecastArray(data.forecast.forecastday[0].hour, new Date().getHours());
       },
       (error: any) => {
         console.log("Error", error);

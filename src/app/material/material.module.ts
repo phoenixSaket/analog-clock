@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -18,7 +19,8 @@ import { ChartModule } from 'angular2-chartjs';
     MatExpansionModule,
     MatProgressBarModule,
     MatSlideToggleModule,
-    ChartModule
+    ChartModule,
+    MatButtonModule
   ],
   exports: [
     MatSidenavModule,
@@ -26,7 +28,8 @@ import { ChartModule } from 'angular2-chartjs';
     MatExpansionModule,
     MatProgressBarModule,
     MatSlideToggleModule,
-    ChartModule
+    ChartModule,
+    MatButtonModule
   ]
 })
 export class MaterialModule { }

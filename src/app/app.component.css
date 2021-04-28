@@ -13,7 +13,7 @@
 }
 
 canvas {
-    opacity: 0.8;
+    opacity: 0.85;
     box-shadow: 0px 0px 15px black;
     border-radius: 50%;
     z-index: 20;
@@ -104,7 +104,6 @@ canvas {
 
 .toggle-container {
     display: flex;
-    flex-direction: column;
 }
 
 @keyframes show {
@@ -136,10 +135,10 @@ canvas {
     color: black;
     z-index: 50000;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.85);
     opacity: 1;
     /* min-width: 300px; */
-    width: 100%;
+    width: 0;
     max-width: 500px;
     overflow-y: scroll !important;
 }
@@ -165,7 +164,9 @@ canvas {
     animation: show-side 0.5s ease-in;
     display: block;
     right: 0;
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
 }
 
 .hide-side {
@@ -176,9 +177,10 @@ canvas {
 }
 
 .toggle-container {
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 @keyframes show-side {
@@ -294,7 +296,9 @@ canvas {
 }
 
 mat-expansion-panel {
-    width: 450px !important;
+    width: 100% !important;
+    max-width: 450px;
+    min-width: 260px;
 }
 
 .pointer {
@@ -302,7 +306,10 @@ mat-expansion-panel {
 }
 
 .single-line {
-    display: inline;
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    justify-content: center;
 }
 
 .single-line-avatar {
@@ -333,4 +340,14 @@ mat-expansion-panel {
 
 .success {
     color: darkgreen;
+}
+
+.colored-toogle {
+    font-size: 50px;
+}
+
+.toggle-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

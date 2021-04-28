@@ -1,6 +1,6 @@
 .mat-expansion-panel {
     background: transparent !important;
-    background-color: rgba(255, 255, 255, 0.7) !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
 }
 
 .height-scroll {
@@ -50,7 +50,7 @@
 }
 
 .mini-title {
-    text-transform: capitalize;
+    text-transform: uppercase;
     color: black;
     font-size: 25px;
     letter-spacing: 1.5px;
@@ -99,4 +99,25 @@
 .mini-heading {
     font-weight: 800;
     font-size: 15px;
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-settings {
+    margin: 12px;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.margin-t-20 {
+    margin-top: 20px;
 }

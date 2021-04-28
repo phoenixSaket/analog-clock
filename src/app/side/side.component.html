@@ -9,22 +9,22 @@
                             <span class="mini-title">{{this.message}}</span>
                         </div>
                     </div>
-                    <mat-progress-bar mode="determinate" [value]="this.progress"></mat-progress-bar>
+                    <mat-progress-bar class="margin-td-10" mode="determinate" [value]="this.progress"></mat-progress-bar>
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <mat-accordion multi>
+            <mat-accordion multi class="margin-t-20">
                 <mat-expansion-panel class="main-display-mini">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <span class="mini-title black">Weather</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div class="weather-container">
-                        <img [src]="this.weatherData?.current?.condition?.icon" [alt]="this.weatherData?.current?.condition?.text">
+                    <div class="weather-container" *ngIf="this.hasWeatherData">
+                        <img [src]="this.weatherData?.condition?.icon" [alt]="this.weatherData?.condition?.text">
                         <div class="weather-container-inner">
                             <span class="mini-heading">
-                                {{this.weatherData?.current?.temp_c}} °C
+                                {{this.weatherData?.temp}} °C
                             </span>
                             <span class="mini-heading">
                                 Feels like {{this.weatherData?.current?.feelslike_c}} °C
@@ -32,7 +32,11 @@
                             <span class="mini-heading">
                                 {{this.weatherData?.location?.name}} , {{this.weatherData?.location?.region}} , {{this.weatherData?.location?.country}} 
                             </span>
+                            <button mat-raised-button color="primary" (click)="getCurrentTemp()">Refresh</button>
                         </div>
+                    </div>
+                    <div class="weather-container" *ngIf="!this.hasWeatherData">
+                        <button mat-raised-button color="primary" (click)="getCurrentTemp()">Get Weather Info</button>
                     </div>
                 </mat-expansion-panel>
                 <mat-expansion-panel>
@@ -41,11 +45,16 @@
                             <span class="mini-title black">Forecast</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div *ngIf="this.isForecast">
-                        <chart [type]="this.type" [data]="this.data" [options]="this.options"></chart>
-                    </div>
-                    <div *ngIf="!this.isForecast">
-                        <button mat-raised-button (click)="getForecastClick()">Get Data</button>
+                    <div class="forecast-container">
+                        <div *ngIf="this.isForecast">
+                            <chart [type]="this.type" [data]="this.data" [options]="this.options"></chart>
+                        </div>
+                        <div *ngIf="!this.isForecast">
+                            <button mat-raised-button color="primary" (click)="getForecastClick()">Get Forecast</button>
+                        </div>
+                        <div *ngIf="this.isForecast">
+                            <button mat-raised-button color="primary" (click)="getForecastClick()">Refresh</button>
+                        </div>
                     </div>
                 </mat-expansion-panel>
                 <!-- <mat-expansion-panel>
@@ -62,15 +71,11 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                 </mat-expansion-panel> -->
-
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <span class="mini-title black">Settings</span>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <span class="material-icons pointer active-settings" (click)="settingsClicked()">settings</span>
-                </mat-expansion-panel>
+                <div class="button-container">
+                    <button mat-fab color="primary" class="side-settings" (click)="settingsClicked()">
+                        <span class="material-icons pointer" >settings</span>
+                    </button>
+                </div>
             </mat-accordion>
         </mat-expansion-panel>
     </mat-accordion>

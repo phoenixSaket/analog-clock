@@ -42,6 +42,11 @@ body {
     width: 100%;
 }
 
-.mat-expansion-panel-body {
+app-side .mat-expansion-panel-body {
     width: 100% !important;
+    padding: 16px 24px 16px !important;
+}
+
+.margin-td-10 {
+    margin: 10px 0px;
 }
