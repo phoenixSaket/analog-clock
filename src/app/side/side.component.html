@@ -12,15 +12,17 @@
                     <mat-progress-bar class="margin-td-10" mode="determinate" [value]="this.progress"></mat-progress-bar>
                 </mat-panel-title>
             </mat-expansion-panel-header>
+            <mat-accordion multi cdkDropList (cdkDropListDropped)="drop($event)">
+                <mat-expansion-panel cdkDrag *ngFor="let panel of this.panelData">
 
-            <mat-accordion multi class="margin-t-20">
-                <mat-expansion-panel class="main-display-mini">
-                    <mat-expansion-panel-header>
+                    <!-- Start of weather -->
+
+                    <mat-expansion-panel-header *ngIf="panel.type == 'weather'">
                         <mat-panel-title>
-                            <span class="mini-title black">Weather</span>
+                            <span class="mini-title black">{{panel.title}}</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div class="weather-container" *ngIf="this.hasWeatherData">
+                    <div class="weather-container" *ngIf="panel.type == 'weather'">
                         <img [src]="this.weatherData?.current?.condition?.icon" [alt]="this.weatherData?.condition?.text">
                         <div class="weather-container-inner">
                             <span class="mini-heading">
@@ -32,46 +34,47 @@
                             <span class="mini-heading">
                                 {{this.weatherData?.location?.name}} , {{this.weatherData?.location?.region}} , {{this.weatherData?.location?.country}} 
                             </span>
-
                         </div>
-
                     </div>
-                    <div class="button-container">
+                    <div class="button-container" *ngIf="panel.type == 'weather'">
                         <button mat-fab color="primary" class="side-settings" (click)="getWeatherData()">
                             <span class="material-icons pointer" >sync</span>
                         </button>
                     </div>
-                    <div class="weather-container" *ngIf="!this.hasWeatherData">
-
+                    <div class="weather-container" *ngIf="!this.hasWeatherData && panel.type == 'weather'">
                         <button mat-raised-button color="primary" (click)="getWeatherData()">Get Weather Info</button>
                     </div>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
+
+                    <!-- End of weather -->
+                    <!-- Start of forecast -->
+
+                    <mat-expansion-panel-header *ngIf="panel.type == 'forecast'">
                         <mat-panel-title>
                             <span class="mini-title black">Forecast</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div class="forecast-container">
+                    <div class="forecast-container" *ngIf="panel.type == 'forecast'">
                         <div>
                             <chart [type]="this.type" [data]="this.data" [options]="this.options"></chart>
                         </div>
                         <div *ngIf="this.isForecast">
                             <div class="button-container">
                                 <button mat-fab color="primary" class="side-settings" (click)="getForecastData()">
-                                <span class="material-icons pointer" >sync</span>
-                            </button>
+                                    <span class="material-icons pointer" >sync</span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
+
+                    <!-- End of forecast -->
+                    <!-- Start of Covid -->
+
+                    <mat-expansion-panel-header *ngIf="panel.type == 'covid'">
                         <mat-panel-title>
                             <span class="mini-title black">Covid 19</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div class="covid-container-outer">
+                    <div class="covid-container-outer" *ngIf="panel.type == 'covid'">
                         <div class="covid-container">
                             <div class="box">
                                 <span class="total-cases">Total Cases</span>
@@ -118,12 +121,29 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- End Of Covid -->
+                    <!-- Start of quote -->
+
+                    <mat-expansion-panel-header *ngIf="panel.type == 'quote'">
+                        <mat-panel-title>
+                            <span class="mini-title black">{{panel.title}}</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="quote-container" *ngIf="panel.type == 'quote'">
+                        <div class="quote-container-inner w-100">
+                            <div class="quote w-100">
+                                <div class="quote-inner pad-10">{{this?.quoteData?.text}}</div>
+                            </div>
+                            <div class="author w-100" *ngIf="this?.quoteData?.author">
+                                - {{this?.quoteData?.author}}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- End of quote -->
                 </mat-expansion-panel>
-                <div class="button-container">
-                    <button mat-fab color="primary" class="side-settings" (click)="settingsClicked()">
-                        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingClicked ? 'rotate' : 'anti-rotate'"  [innerHTML]="this.settingClicked ? 'close' : 'settings'"></span>
-                    </button>
-                </div>
             </mat-accordion>
         </mat-expansion-panel>
     </mat-accordion>

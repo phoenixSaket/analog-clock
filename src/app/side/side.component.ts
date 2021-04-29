@@ -1,5 +1,8 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CovidService } from '../covid.service';
+import { PanelData } from '../panel-data';
+import { QuotesService } from '../quotes.service';
 import { WeatherServiceService } from '../weather-service.service';
 
 @Component({
@@ -21,7 +24,13 @@ export class SideComponent implements OnInit {
   isForecast: boolean = false;
   forecast = [];
   type: string;
-  
+  weatherDiv: HTMLElement = document.getElementById("weather");
+  forecastDiv: HTMLElement = document.getElementById("forecast");
+  covidDiv: HTMLElement = document.getElementById("covid");
+  quoteData: any;
+
+  arrayDiv = [this.weatherDiv, this.forecastDiv ,this.covidDiv ];
+
   data: {
     labels: any[]; datasets: {
       label: string;
@@ -32,13 +41,17 @@ export class SideComponent implements OnInit {
   hasWeatherData: boolean = false;
   options: { responsive: boolean; maintainAspectRatio: boolean; };
   covidData: any;
+  panelData: any;
 
-  constructor(private service: WeatherServiceService, private covid: CovidService) { }
+  constructor(private service: WeatherServiceService, private covid: CovidService,private quote: QuotesService) { }
 
   ngOnInit(): void {
     this.getMessage(this);
     this.getWeatherData();
     this.getCovidData();
+    this.getQuote();
+    let panel : PanelData = new PanelData(this.service, this.covid);
+    this.panelData = panel.getPanelData();
   }
 
   getWeatherData() {
@@ -146,4 +159,25 @@ export class SideComponent implements OnInit {
     )
   }
 
+  drop(event) {
+    moveItemInArray(this.panelData, event.previousIndex, event.currentIndex);
+  }
+
+  getQuote() {
+    
+      let quote = {};
+      let length = 0;
+      let random = Math.random();
+      this.quote.getQuotes().subscribe(
+        (data)=>{
+          length = data.length;
+          let pos = Math.round(length * random);
+          this.quoteData = data[pos];
+        },
+        (error)=>{
+          console.error("ERROR : ",error);
+        }
+      )
+    
+  }
 }

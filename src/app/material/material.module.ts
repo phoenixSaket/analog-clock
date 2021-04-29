@@ -7,7 +7,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ChartModule } from 'angular2-chartjs';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 
@@ -22,7 +23,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSlideToggleModule,
     ChartModule,
     MatButtonModule,
-    MatAutocompleteModule
+    DragDropModule
   ],
   exports: [
     MatSidenavModule,
@@ -32,7 +33,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatSlideToggleModule,
     ChartModule,
     MatButtonModule,
-    MatAutocompleteModule
+    DragDropModule
   ]
 })
 export class MaterialModule { }

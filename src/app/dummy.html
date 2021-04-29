@@ -1,0 +1,112 @@
+<mat-accordion multi class="margin-t-20" cdkDropList (cdkDropListDropped)="drop($event)">
+    <mat-expansion-panel cdkDrag id="weather">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span class="mini-title black">Weather</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="weather-container" *ngIf="this.hasWeatherData">
+            <img [src]="this.weatherData?.current?.condition?.icon" [alt]="this.weatherData?.condition?.text">
+            <div class="weather-container-inner">
+                <span class="mini-heading">
+                                {{this.weatherData?.current?.temp_c}} °C
+                            </span>
+                <span class="mini-heading">
+                                Feels like {{this.weatherData?.current?.feelslike_c}} °C
+                            </span>
+                <span class="mini-heading">
+                                {{this.weatherData?.location?.name}} , {{this.weatherData?.location?.region}} , {{this.weatherData?.location?.country}} 
+                            </span>
+
+            </div>
+
+        </div>
+        <div class="button-container">
+            <button mat-fab color="primary" class="side-settings" (click)="getWeatherData()">
+                            <span class="material-icons pointer" >sync</span>
+                        </button>
+        </div>
+        <div class="weather-container" *ngIf="!this.hasWeatherData">
+
+            <button mat-raised-button color="primary" (click)="getWeatherData()">Get Weather Info</button>
+        </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel cdkDrag id="forecast">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span class="mini-title black">Forecast</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="forecast-container">
+            <div>
+                <chart [type]="this.type" [data]="this.data" [options]="this.options"></chart>
+            </div>
+            <div *ngIf="this.isForecast">
+                <div class="button-container">
+                    <button mat-fab color="primary" class="side-settings" (click)="getForecastData()">
+                                <span class="material-icons pointer" >sync</span>
+                            </button>
+                </div>
+            </div>
+        </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel cdkDrag id="covid">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span class="mini-title black">Covid 19</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="covid-container-outer">
+            <div class="covid-container">
+                <div class="box">
+                    <span class="total-cases">Total Cases</span>
+                    <span>{{this.covidData?.cases}}</span>
+                </div>
+                <div class="box">
+                    <span class="total-cases">Total Recovered</span>
+                    <span>{{this.covidData?.recovered}}</span>
+                </div>
+                <div class="box">
+                    <span class="total-cases">Total Deaths</span>
+                    <span>{{this.covidData?.deaths}}</span>
+                </div>
+                <div class="box">
+                    <span class="total-cases">Recovery Rate</span>
+                    <span>{{this.covidData?.recovered * 100 / this.covidData?.cases}}</span>
+                </div>
+            </div>
+            <hr>
+            <span class="w-100 right-align">Daily Update</span>
+            <hr>
+
+            <div class="covid-container">
+                <div class="box">
+                    <span class="total-cases">Cases</span>
+                    <span>{{this.covidData?.todayCases}}</span>
+                </div>
+                <div class="box">
+                    <span class="total-cases">Recovered</span>
+                    <span>{{this.covidData?.todayRecovered}}</span>
+                </div>
+                <div class="box">
+                    <span class="total-cases">Deaths</span>
+                    <span>{{this.covidData?.todayDeaths}}</span>
+                </div>
+                <div class="box">
+                    <span class="total-cases">Recovery Rate</span>
+                    <span>{{this.covidData?.todayRecovered * 100 / this.covidData?.todayCases}}</span>
+                </div>
+            </div>
+            <div class="button-container">
+                <button mat-fab color="primary" class="side-settings" (click)="getCovidData()">
+                                <span class="material-icons">sync</span>
+                            </button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+    <div class="button-container">
+        <button mat-fab color="primary" class="side-settings" (click)="settingsClicked()">
+                        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingClicked ? 'rotate' : 'anti-rotate'"  [innerHTML]="this.settingClicked ? 'close' : 'settings'"></span>
+                    </button>
+    </div>
+</mat-accordion>

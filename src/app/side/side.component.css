@@ -148,3 +148,49 @@
     transform: rotate(360deg);
     transition-duration: 1s;
 }
+
+.quote-container {
+    max-width: 304px;
+}
+
+.quote-container-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.quote {
+    font-size: 20px;
+}
+
+.pad-10 {
+    padding: 10px;
+}
+
+.text-start,
+.text-end,
+.author {
+    display: flex;
+}
+
+.text-start {
+    justify-content: flex-start;
+}
+
+.text-end,
+.author {
+    justify-content: flex-end;
+}
+
+.author {
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 15px;
+}
+
+.quote-inner {
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+}
