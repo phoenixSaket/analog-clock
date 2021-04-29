@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'analog-clock';
   images = [];
   avatars = [
+    "assets/Avatars/avatar-0.png",
     "assets/Avatars/avatar-1.png",
     "assets/Avatars/avatar-2.png",
     "assets/Avatars/avatar-3.png",
@@ -20,7 +21,7 @@ export class AppComponent {
     "assets/Avatars/avatar-8.png",
     "assets/Avatars/avatar-9.png",
   ];
-  selectedAvatar = "assets/Avatars/avatar-1.png";
+  selectedAvatar = "assets/Avatars/avatar-0.png";
   currentImage: number = 0;
   image = this.images[this.currentImage];
   breakAnimation: boolean = false;
@@ -44,7 +45,7 @@ export class AppComponent {
     this.selectedCity = "Paratwada";
     this.getWeatherData();
 
-    for (let i = 1; i <= 18; i++) {
+    for (let i = 1; i <= 19; i++) {
       this.images.push("assets/Images/bg-" + i + ".jpeg");
     }
 
