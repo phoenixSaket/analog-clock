@@ -21,10 +21,10 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="weather-container" *ngIf="this.hasWeatherData">
-                        <img [src]="this.weatherData?.condition?.icon" [alt]="this.weatherData?.condition?.text">
+                        <img [src]="this.weatherData?.current?.condition?.icon" [alt]="this.weatherData?.condition?.text">
                         <div class="weather-container-inner">
                             <span class="mini-heading">
-                                {{this.weatherData?.temp}} °C
+                                {{this.weatherData?.current?.temp_c}} °C
                             </span>
                             <span class="mini-heading">
                                 Feels like {{this.weatherData?.current?.feelslike_c}} °C
@@ -32,11 +32,18 @@
                             <span class="mini-heading">
                                 {{this.weatherData?.location?.name}} , {{this.weatherData?.location?.region}} , {{this.weatherData?.location?.country}} 
                             </span>
-                            <button mat-raised-button color="primary" (click)="getCurrentTemp()">Refresh</button>
+
                         </div>
+
+                    </div>
+                    <div class="button-container">
+                        <button mat-fab color="primary" class="side-settings" (click)="getWeatherData()">
+                            <span class="material-icons pointer" >sync</span>
+                        </button>
                     </div>
                     <div class="weather-container" *ngIf="!this.hasWeatherData">
-                        <button mat-raised-button color="primary" (click)="getCurrentTemp()">Get Weather Info</button>
+
+                        <button mat-raised-button color="primary" (click)="getWeatherData()">Get Weather Info</button>
                     </div>
                 </mat-expansion-panel>
                 <mat-expansion-panel>
@@ -46,14 +53,15 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="forecast-container">
-                        <div *ngIf="this.isForecast">
+                        <div>
                             <chart [type]="this.type" [data]="this.data" [options]="this.options"></chart>
                         </div>
-                        <div *ngIf="!this.isForecast">
-                            <button mat-raised-button color="primary" (click)="getForecastClick()">Get Forecast</button>
-                        </div>
                         <div *ngIf="this.isForecast">
-                            <button mat-raised-button color="primary" (click)="getForecastClick()">Refresh</button>
+                            <div class="button-container">
+                                <button mat-fab color="primary" class="side-settings" (click)="getForecastData()">
+                                <span class="material-icons pointer" >sync</span>
+                            </button>
+                            </div>
                         </div>
                     </div>
                 </mat-expansion-panel>
@@ -113,7 +121,7 @@
                 </mat-expansion-panel>
                 <div class="button-container">
                     <button mat-fab color="primary" class="side-settings" (click)="settingsClicked()">
-                        <span class="material-icons pointer" >settings</span>
+                        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingClicked ? 'rotate' : 'anti-rotate'"  [innerHTML]="this.settingClicked ? 'close' : 'settings'"></span>
                     </button>
                 </div>
             </mat-accordion>

@@ -12,6 +12,7 @@ export class SideComponent implements OnInit {
   @Input() name: string;
   @Input() avatar: string;
   @Input() city: any;
+  @Input() settingClicked: boolean;
   @Output() settingsClick: EventEmitter<any> = new EventEmitter();
   message: string;
   progress: number;
@@ -20,10 +21,10 @@ export class SideComponent implements OnInit {
   isForecast: boolean = false;
   forecast = [];
   type: string;
+  
   data: {
     labels: any[]; datasets: {
       label: string;
-      // data: [65, 59, 80, 81, 56, 55, 65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55]
       data: any[];
       backgroundColor: string;
     }[];
@@ -36,6 +37,27 @@ export class SideComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMessage(this);
+    this.getWeatherData();
+    this.getCovidData();
+  }
+
+  getWeatherData() {
+    this.service.getWeather(this.service.getCity()).subscribe(
+      (data) => {
+        this.weatherData = data;
+        this.hasWeatherData = true;
+        this.getForecastData();
+      },
+      (error) => {
+        this.hasWeatherData = false;
+        console.error("ERROR : ", error);
+      }
+    )
+  }
+
+  getForecastData() {
+    this.service.setForecastArray(this.weatherData?.forecast?.forecastday[0]?.hour, new Date().getHours());
+    this.getForecastClick();
   }
 
   getMessage(that) {
@@ -63,11 +85,9 @@ export class SideComponent implements OnInit {
   }
 
   settingsClicked() {
+    this.settingClicked = !this.settingClicked;
     this.settingsClick.emit(true);
   }
-
-
-
 
   getLabels() {
     let labels = [];
@@ -77,10 +97,15 @@ export class SideComponent implements OnInit {
 
     while (k <= 5) {
       if (start + k <= 23) {
-        if (start + k >= 12) {
-          labels.push(start + k - 12 + "PM")
-        } else {
-          labels.push(start + k + "AM")
+        if (start + k == 0) {
+          labels.push(12 + "AM")
+        }
+        else {
+          if (start + k >= 12) {
+            labels.push(start + k - 12 + "PM")
+          } else {
+            labels.push(start + k + "AM")
+          }
         }
       } else {
         start = 0;
@@ -89,9 +114,6 @@ export class SideComponent implements OnInit {
       k++;
     }
 
-    // for (let i = date.getHours() > 23 ? 0 : date.getHours(); i <= ((date.getHours() > 23) ? 12 : date.getHours() + 12); i++) {
-    //   labels.push(i);
-    // }
     return labels;
   }
 
@@ -105,7 +127,6 @@ export class SideComponent implements OnInit {
       datasets: [
         {
           label: "Temperature (° C)",
-          // data: [65, 59, 80, 81, 56, 55, 65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55,65, 59, 80, 81, 56, 55]
           data: this.forecast,
           backgroundColor: "#3F51B575"
         }
@@ -117,18 +138,11 @@ export class SideComponent implements OnInit {
     };
   }
 
-  getCurrentTemp() {
-    let data: any = this.service.getCurrentData();
-    this.weatherData = data;
-    this.hasWeatherData = true;
-  }
-
   getCovidData() {
     this.covid.getCovidData().subscribe(
       (data) => {
-        console.log(data);
         this.covidData = data;
-      }, (error) => { console.log(error); }
+      }, (error) => { console.error(error); }
     )
   }
 

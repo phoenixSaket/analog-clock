@@ -32,21 +32,22 @@ export class AppComponent {
   weatherData: any;
   city: string = "";
   showSide = true;
+  insertAvatarText: string = "";
+  linkError: string = "";
+  insertImageText: string = "";
+  linkErrorImage: string= "";
 
-
-
-  constructor(private service: WeatherServiceService) {
-  }
+  constructor(private service: WeatherServiceService) { }
 
 
   ngOnInit() {
     this.selectedCity = "Paratwada";
     this.getWeatherData();
 
-    for(let i = 1; i <= 18; i++ ) {
-      this.images.push("assets/Images/bg-"+i+".jpeg");      
+    for (let i = 1; i <= 18; i++) {
+      this.images.push("assets/Images/bg-" + i + ".jpeg");
     }
-    
+
     var canvas = <HTMLCanvasElement>document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     var radius = canvas.height / 2;
@@ -152,7 +153,7 @@ export class AppComponent {
     }
 
     this.changeImage(this);
-    
+
   }
 
 
@@ -205,7 +206,6 @@ export class AppComponent {
   }
 
   updateCity(event: any) {
-    console.log("Weather")
     this.selectedCity = event.target.value;
     this.getWeatherData();
   }
@@ -213,26 +213,15 @@ export class AppComponent {
   getWeatherData() {
     this.service.getWeather(this.selectedCity).subscribe(
       (data: any) => {
-        console.log("Data", data);
         this.weatherError = false;
         this.weatherErrorText = "City Found : ";
         this.city = data?.location?.name;
+        this.service.setCity(data?.location?.name);
+        this.service.setCountry(data?.location?.country);
         this.weatherData = data;
-        this.service.setCurrentData(
-          {
-            "condition":data.current.condition,
-            "temp": data.current.temp_c,
-            "feelsLike": data.current.feelslike_c,
-            "location": {
-              "country": data.location.country,
-              "region": data.location.region,
-              "name": data.location.name
-            }
-        })
-        this.service.setForecastArray(data.forecast.forecastday[0].hour, new Date().getHours());
       },
       (error: any) => {
-        console.log("Error", error);
+        console.error("Error", error);
         this.weatherError = true;
         this.weatherErrorText = "Unable to find City";
         this.city = "";
@@ -251,4 +240,34 @@ export class AppComponent {
   showSideClick() {
     this.showSide = !this.showSide;
   }
+
+  insertAvatar(event) {
+    console.log("Avatar", event.target.value);
+    let pattern = new RegExp(/(https:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    let res = pattern.test(event.target.value);
+    let imgPattern = new RegExp(/\.(jpeg|jpg|gif|png)$/);
+    res = imgPattern.test(event.target.value);
+
+    if (res) {
+      this.avatars.push(event.target.value);
+      this.linkError = "";
+    } else {
+      this.linkError = "Invalid Link";
+    }
+  }
+
+  insertImage(event) {
+    console.log("Image", event.target.value);
+    let pattern = new RegExp(/(https:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    let res = pattern.test(event.target.value);
+    let imgPattern = new RegExp(/\.(jpeg|jpg|gif|png)$/);
+    res = imgPattern.test(event.target.value);
+    if (res) {
+      this.images.push(event.target.value);
+      this.linkErrorImage = "";
+    } else {
+      this.linkErrorImage = "Invalid Link";
+    }
+  }
+
 }

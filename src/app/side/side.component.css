@@ -35,7 +35,7 @@
 }
 
 .outer-container {
-    width: 300px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -137,4 +137,14 @@
 .box {
     display: flex;
     justify-content: space-between;
+}
+
+.rotate {
+    transform: rotate(-360deg);
+    transition-duration: 1s;
+}
+
+.anti-rotate {
+    transform: rotate(360deg);
+    transition-duration: 1s;
 }

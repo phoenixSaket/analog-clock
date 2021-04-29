@@ -3,7 +3,7 @@
 
 <body>
     <div class="container">
-        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick($event)" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity" [weatherData]="this.weatherData"></app-side>
+        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick($event)" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity" [weatherData]="this.weatherData" [settingClicked]="this.settingsClicked"></app-side>
         <canvas id="canvas" width="400px" height="400px"></canvas>
     </div>
     <div class="settings overlay">
@@ -24,9 +24,6 @@
                             </mat-panel-title>
                             <span class="material-icons" [ngClass]="this.weatherError ? 'invalid' : 'success'" [innerHTML]="this.weatherError ? 'report_gmailerrorred' : 'verified'">
                             </span>
-                            <!-- <mat-panel-description>
-                                <span [innerHTML]="this.selectedCity.length > 0 ? this.selectedCity : 'Select your city'"></span>
-                            </mat-panel-description> -->
                         </mat-expansion-panel-header>
                         <div class="weather-input-container">
                             <mat-form-field>
@@ -34,7 +31,7 @@
                                 <input type="text" matInput [value]="this.selectedCity" (change)="updateCity($event)" placeholder="City">
                             </mat-form-field>
                             <span [ngClass]="this.weatherError ? 'invalid' : ''">{{this.weatherErrorText}} 
-                                <span class="bold">{{this.city}}</span>
+                                <span class="bold success">{{this.city}}</span>
                             </span>
                         </div>
                     </mat-expansion-panel>
@@ -62,9 +59,6 @@
                             <mat-panel-title>
                                 <span class="mini-title">Background</span>
                             </mat-panel-title>
-                            <!-- <mat-panel-description>
-                                Select a background image
-                            </mat-panel-description> -->
                         </mat-expansion-panel-header>
 
                         <div class="grid-box">
@@ -74,6 +68,15 @@
                             </div>
                             <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
                             <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span>
+                            <div class="inserter w-100">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Background Image link</mat-label>
+                                    <input type="text" matInput [value]="this.insertImageText" (change)="insertImage($event)" placeholder="link">
+                                </mat-form-field>
+                                <span class="invalid" *ngIf="this.linkErrorImage?.length > 0">
+                                    {{this.linkErrorImage}}
+                                </span>
+                            </div>
                         </div>
 
                     </mat-expansion-panel>
@@ -82,15 +85,21 @@
                             <mat-panel-title>
                                 <span class="mini-title">Avatar</span>
                             </mat-panel-title>
-                            <!-- <mat-panel-description>
-                                Select a background image
-                            </mat-panel-description> -->
                         </mat-expansion-panel-header>
 
                         <div class="grid-box">
                             <img class="selected-avatar" [src]="this.selectedAvatar" alt="selected">
                             <div class="single-line-avatar">
                                 <img class="thumbnail-avatar pointer" *ngFor="let image of this.avatars" [src]="image" (click)="selectAvatar(image)" alt="avatar">
+                            </div>
+                            <div class="inserter w-100">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Avatar link</mat-label>
+                                    <input type="text" matInput [value]="this.insertAvatarText" (change)="insertAvatar($event)" placeholder="link">
+                                </mat-form-field>
+                                <span class="invalid" *ngIf="this.linkError?.length > 0">
+                                    {{this.linkError}}
+                                </span>
                             </div>
                         </div>
 

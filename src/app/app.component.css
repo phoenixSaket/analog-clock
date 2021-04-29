@@ -231,11 +231,7 @@ canvas {
     position: fixed;
     bottom: 0;
     right: 0;
-    margin: 0 60px 60px 0;
-}
-
-.w-60 {
-    width: 60% !important;
+    margin: 0 20px 20px 0;
 }
 
 .content {
@@ -293,6 +289,7 @@ canvas {
 
 .content {
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 mat-expansion-panel {
@@ -350,4 +347,9 @@ mat-expansion-panel {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.inserter {
+    width: 100%;
+    padding: 10px
 }
