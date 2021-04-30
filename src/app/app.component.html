@@ -3,16 +3,10 @@
 
 <body>
     <div class="container">
-        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick($event)" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity" [weatherData]="this.weatherData" [settingClicked]="this.settingsClicked"></app-side>
+        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick()" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity" [weatherData]="this.weatherData" [settingClicked]="this.settingsClicked"></app-side>
         <canvas id="canvas" width="400px" height="400px"></canvas>
     </div>
-    <div class="settings overlay">
-        <div class="icon-container">
-            <div class="d-flex">
-                <span class="material-icons pointer active-settings" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick($event)">settings</span>
-            </div>
-        </div>
-    </div>
+    <div class="container overlay" (click)="closeSlideout()"></div>
     <div class="overlay-side" id="side-nav">
         <div class="side-container">
             <div class="content">
@@ -63,11 +57,12 @@
 
                         <div class="grid-box">
                             <img class="selected-image" [src]="this.image" alt="selected">
+                            <hr class="w-100" />
                             <div class="single-line">
                                 <img class="thumbnail pointer" *ngFor="let image of this.images" [src]="image" (click)="selectImage(image)" alt="background">
                             </div>
-                            <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
-                            <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span>
+                            <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
+                            <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
                             <div class="inserter w-100">
                                 <mat-form-field class="w-100">
                                     <mat-label>Background Image link</mat-label>
@@ -107,7 +102,7 @@
                 </mat-accordion>
             </div>
         </div>
-        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick($event)" [innerHTML]="this.settingsClicked ? 'close' : 'settings'"></span>
+        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()" [innerHTML]="this.settingsClicked ? 'close' : 'settings'"></span>
     </div>
 </body>
 

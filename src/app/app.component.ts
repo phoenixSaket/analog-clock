@@ -36,7 +36,7 @@ export class AppComponent {
   insertAvatarText: string = "";
   linkError: string = "";
   insertImageText: string = "";
-  linkErrorImage: string= "";
+  linkErrorImage: string = "";
 
   constructor(private service: WeatherServiceService) { }
 
@@ -186,7 +186,7 @@ export class AppComponent {
     }
   }
 
-  settingsClick(event) {
+  settingsClick() {
     this.settingsClicked = !this.settingsClicked;
     let side = document.getElementById("side-nav");
     if (this.isSideOpen) {
@@ -268,6 +268,12 @@ export class AppComponent {
       this.linkErrorImage = "";
     } else {
       this.linkErrorImage = "Invalid Link";
+    }
+  }
+
+  closeSlideout() {
+    if (this.settingsClicked) {
+      this.settingsClick();
     }
   }
 

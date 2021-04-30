@@ -29,7 +29,7 @@ export class SideComponent implements OnInit {
   covidDiv: HTMLElement = document.getElementById("covid");
   quoteData: any;
 
-  arrayDiv = [this.weatherDiv, this.forecastDiv ,this.covidDiv ];
+  arrayDiv = [this.weatherDiv, this.forecastDiv, this.covidDiv];
 
   data: {
     labels: any[]; datasets: {
@@ -44,18 +44,18 @@ export class SideComponent implements OnInit {
   panelData: any;
   random: number = 0;
 
-  constructor(private service: WeatherServiceService, private covid: CovidService,private quote: QuotesService) { }
+  constructor(private service: WeatherServiceService, private covid: CovidService, private quote: QuotesService) { }
 
   ngOnInit(): void {
     this.getMessage(this);
-    this.getWeatherData();
-    this.getCovidData();
-    this.getQuote();
-    let panel : PanelData = new PanelData(this.service, this.covid);
+    this.getWeatherData(this);
+    this.getCovidData(this);
+    this.getQuote(this);
+    let panel: PanelData = new PanelData(this.service, this.covid);
     this.panelData = panel.getPanelData();
   }
 
-  getWeatherData() {
+  getWeatherData(that) {
     this.service.getWeather(this.service.getCity()).subscribe(
       (data) => {
         this.weatherData = data;
@@ -67,6 +67,40 @@ export class SideComponent implements OnInit {
         console.error("ERROR : ", error);
       }
     )
+    setTimeout(() => {
+      this.getWeatherData(that);
+    }, 1800000);
+  }
+
+  getCovidData(that) {
+    this.covid.getCovidData().subscribe(
+      (data) => {
+        this.covidData = data;
+      }, (error) => { console.error(error); }
+    )
+    setTimeout(() => {
+      this.getCovidData(that);
+    }, 1800000);
+  }
+
+  getQuote(that) {
+
+    let quote = {};
+    let length = 0;
+    this.random = Math.random();
+    this.quote.getQuotes().subscribe(
+      (data) => {
+        length = data.length;
+        let pos = Math.round(length * this.random);
+        this.quoteData = data[pos];
+      },
+      (error) => {
+        console.error("ERROR : ", error);
+      }
+    )
+    setTimeout(() => {
+      this.getQuote(that);
+    }, 1800000);
   }
 
   getForecastData() {
@@ -152,34 +186,10 @@ export class SideComponent implements OnInit {
     };
   }
 
-  getCovidData() {
-    this.covid.getCovidData().subscribe(
-      (data) => {
-        this.covidData = data;
-      }, (error) => { console.error(error); }
-    )
-  }
-
   drop(event) {
     moveItemInArray(this.panelData, event.previousIndex, event.currentIndex);
   }
 
-  getQuote() {
-    
-      let quote = {};
-      let length = 0;
-      this.random = Math.random();
-      this.quote.getQuotes().subscribe(
-        (data)=>{
-          length = data.length;
-          let pos = Math.round(length * this.random);
-          this.quoteData = data[pos];
-        },
-        (error)=>{
-          console.error("ERROR : ",error);
-        }
-      )
-    
-  }
+
 
 }

@@ -21,8 +21,12 @@ canvas {
 }
 
 .overlay {
-    opacity: 0.3;
-    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
 
@@ -317,9 +321,11 @@ mat-expansion-panel {
 }
 
 .mini-bg {
-    background-color: white;
+    background-color: #3F51B5;
+    color: white;
     border-radius: 50%;
     box-shadow: 0px 0px 5px black;
+    padding: 10px;
 }
 
 .weather-input-container {
@@ -352,4 +358,9 @@ mat-expansion-panel {
 .inserter {
     width: 100%;
     padding: 10px
+}
+
+app-side {
+    z-index: 20;
+    box-shadow: 0px 0px 15px black;
 }
