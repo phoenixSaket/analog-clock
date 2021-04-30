@@ -59,7 +59,7 @@
                             <img class="selected-image" [src]="this.image" alt="selected">
                             <hr class="w-100" />
                             <div class="single-line">
-                                <img class="thumbnail pointer" *ngFor="let image of this.images" [src]="image" (click)="selectImage(image)" alt="background">
+                                <img class="thumbnail pointer" *ngFor="let image of this.thumbnails; let i = index" [src]="image" (click)="selectImage(i)" alt="background">
                             </div>
                             <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
                             <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->

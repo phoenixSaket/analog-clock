@@ -37,6 +37,7 @@ export class AppComponent {
   linkError: string = "";
   insertImageText: string = "";
   linkErrorImage: string = "";
+  thumbnails: string[] = [];
 
   constructor(private service: WeatherServiceService) { }
 
@@ -45,8 +46,9 @@ export class AppComponent {
     this.selectedCity = "Paratwada";
     this.getWeatherData();
 
-    for (let i = 1; i <= 19; i++) {
-      this.images.push("assets/Images/bg-" + i + ".jpeg");
+    for (let i = 1; i <= 34; i++) {
+      this.images.push("assets/Images/bg-" + i + ".png");
+      this.thumbnails.push("assets/Thumbnails/thumb-" + i + ".png");
     }
 
     var canvas = <HTMLCanvasElement>document.getElementById("canvas");
@@ -230,8 +232,8 @@ export class AppComponent {
     )
   }
 
-  selectImage(image) {
-    this.image = image;
+  selectImage(index) {
+    this.image = this.images[index];
   }
 
   selectAvatar(image) {
@@ -264,7 +266,7 @@ export class AppComponent {
     let imgPattern = new RegExp(/\.(jpeg|jpg|gif|png)$/);
     res = imgPattern.test(event.target.value);
     if (res) {
-      this.images.push(event.target.value);
+      this.thumbnails.push(event.target.value);
       this.linkErrorImage = "";
     } else {
       this.linkErrorImage = "Invalid Link";
