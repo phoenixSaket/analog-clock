@@ -42,6 +42,7 @@ export class SideComponent implements OnInit {
   options: { responsive: boolean; maintainAspectRatio: boolean; };
   covidData: any;
   panelData: any;
+  random: number = 0;
 
   constructor(private service: WeatherServiceService, private covid: CovidService,private quote: QuotesService) { }
 
@@ -167,11 +168,11 @@ export class SideComponent implements OnInit {
     
       let quote = {};
       let length = 0;
-      let random = Math.random();
+      this.random = Math.random();
       this.quote.getQuotes().subscribe(
         (data)=>{
           length = data.length;
-          let pos = Math.round(length * random);
+          let pos = Math.round(length * this.random);
           this.quoteData = data[pos];
         },
         (error)=>{
@@ -180,4 +181,5 @@ export class SideComponent implements OnInit {
       )
     
   }
+
 }

@@ -130,7 +130,7 @@
                             <span class="mini-title black">{{panel.title}}</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <div class="quote-container" *ngIf="panel.type == 'quote'">
+                    <div class="quote-container pointer" *ngIf="panel.type == 'quote'" (click)="this.getQuote()">
                         <div class="quote-container-inner w-100">
                             <div class="quote w-100">
                                 <div class="quote-inner pad-10">{{this?.quoteData?.text}}</div>
