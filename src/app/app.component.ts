@@ -165,6 +165,7 @@ export class AppComponent {
     that.image = that.images[this.currentImage];
     this.currentImage = this.currentImage + 1;
 
+
     if (this.currentImage + 1 == this.images.length) {
       this.currentImage = 0;
     }
@@ -173,7 +174,7 @@ export class AppComponent {
       if (!this.breakAnimation) {
         this.changeImage(that);
       }
-    }, 30000);
+    }, 180000);
   }
 
   changeImageManually(text: string) {
