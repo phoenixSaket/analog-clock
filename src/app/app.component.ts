@@ -268,6 +268,8 @@ export class AppComponent {
     res = imgPattern.test(event.target.value);
     if (res) {
       this.thumbnails.push(event.target.value);
+      this.images.push(event.target.value);
+
       this.linkErrorImage = "";
     } else {
       this.linkErrorImage = "Invalid Link";
