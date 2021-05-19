@@ -59,3 +59,7 @@ app-side .mat-expansion-panel-body {
         height: 350px;
     }
 }
+
+.settings-panel .mat-expansion-panel-body {
+    width: 100% !important;
+}

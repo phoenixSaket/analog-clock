@@ -29,7 +29,7 @@
                             </span>
                         </div>
                     </mat-expansion-panel>
-                    <mat-expansion-panel>
+                    <mat-expansion-panel class="settings-panel">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <span class="mini-title">settings</span>
@@ -44,6 +44,11 @@
                             <div class="toggle-box">
                                 <span>Show Information</span>
                                 <span class="material-icons colored-toogle pointer" (click)="this.showSideClick()" [innerHTML]="this.showSide ? 'toggle_on' : 'toggle_off'" [style.color]="this.showSide ? '#3F51B5' : '#9e9e9e'">
+                            </span>
+                            </div>
+                            <div class="toggle-box">
+                                <span>Show Numbers</span>
+                                <span class="material-icons colored-toogle pointer" (click)="this.showNumbersClick()" [innerHTML]="this.showNumbersOnClock ? 'toggle_on' : 'toggle_off'" [style.color]="this.showNumbersOnClock ? '#3F51B5' : '#9e9e9e'">
                             </span>
                             </div>
                         </div>

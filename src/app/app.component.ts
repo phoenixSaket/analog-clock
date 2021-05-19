@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { WeatherServiceService } from './weather-service.service';
 
 @Component({
@@ -38,6 +39,8 @@ export class AppComponent {
   insertImageText: string = "";
   linkErrorImage: string = "";
   thumbnails: string[] = [];
+  showNumbers: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  showNumbersOnClock: boolean = true;
 
   constructor(private service: WeatherServiceService) { }
 
@@ -45,27 +48,42 @@ export class AppComponent {
   ngOnInit() {
     this.selectedCity = "Paratwada";
     this.getWeatherData();
-
     for (let i = 1; i <= 34; i++) {
       this.images.push("assets/Images/bg-" + i + ".png");
       this.thumbnails.push("assets/Thumbnails/thumb-" + i + ".png");
     }
 
-    var canvas = <HTMLCanvasElement>document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var radius = canvas.height / 2;
+    this.getClock();
+    
+    this.changeImage(this);
+
+  }
+
+  getClock( ) {
+
+    let show = true;
+    this.showNumbers.subscribe(data=> {
+      show = data;
+    })
+    
+    
+    let canvas = <HTMLCanvasElement>document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    let radius = canvas.height / 2;
     ctx.translate(radius, radius);
     radius = radius * 1;
     setInterval(drawClock, 1000);
 
     function drawClock() {
       drawFace(ctx, radius);
-      drawNumbers(ctx, radius);
+      if (show) {
+        drawNumbers(ctx, radius);
+      }
       drawTime(ctx, radius);
     }
 
     function drawFace(ctx, radius) {
-      var grad;
+      let grad;
       ctx.beginPath();
       ctx.arc(0, 0, radius, 0, 2 * Math.PI);
       ctx.fillStyle = '#efefef';
@@ -85,8 +103,8 @@ export class AppComponent {
     }
 
     function drawNumbers(ctx, radius) {
-      var ang;
-      var num;
+      let ang;
+      let num;
       ctx.font = radius * 0.15 + "px arial";
       ctx.textBaseline = "middle";
       ctx.textAlign = "center";
@@ -118,10 +136,10 @@ export class AppComponent {
     }
 
     function drawTime(ctx, radius) {
-      var now = new Date();
-      var hour = now.getHours();
-      var minute = now.getMinutes();
-      var second = now.getSeconds();
+      let now = new Date();
+      let hour = now.getHours();
+      let minute = now.getMinutes();
+      let second = now.getSeconds();
       //hour
       hour = hour % 12;
       hour = (hour * Math.PI / 6) +
@@ -148,18 +166,14 @@ export class AppComponent {
       ctx.lineTo(0, -length);
       ctx.fillStyle = color;
       ctx.fill();
-      var grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+      let grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
       grad.addColorStop(0, color);
       ctx.strokeStyle = grad;
       ctx.stroke();
       ctx.rotate(-pos);
     }
 
-    this.changeImage(this);
-
   }
-
-
 
   changeImage(that) {
     that.image = that.images[this.currentImage];
@@ -280,6 +294,19 @@ export class AppComponent {
     if (this.settingsClicked) {
       this.settingsClick();
     }
+  }
+
+  showNumbersClick() {
+
+    let show = true;
+    this.showNumbers.subscribe(data=>{
+      show= data;
+    })
+
+    this.showNumbersOnClock = !show;
+
+    this.showNumbers.next(!show);
+    // this.getClock();
   }
 
 }

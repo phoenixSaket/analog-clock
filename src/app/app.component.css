@@ -95,7 +95,7 @@ canvas {
 
 .material-icons {
     font-size: 30px;
-    margin: 10px 10px;
+    margin: 0px 10px;
     z-index: 5000;
 }
 
@@ -183,8 +183,10 @@ canvas {
 .toggle-container {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    /* justify-content: space-between; */
+    align-items: flex-end;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 @keyframes show-side {
@@ -351,7 +353,7 @@ mat-expansion-panel {
 
 .toggle-box {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
