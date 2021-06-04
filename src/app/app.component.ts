@@ -10,19 +10,8 @@ import { WeatherServiceService } from './weather-service.service';
 export class AppComponent {
   title = 'analog-clock';
   images = [];
-  avatars = [
-    "assets/Avatars/avatar-0.png",
-    "assets/Avatars/avatar-1.png",
-    "assets/Avatars/avatar-2.png",
-    "assets/Avatars/avatar-3.png",
-    "assets/Avatars/avatar-4.png",
-    "assets/Avatars/avatar-5.png",
-    "assets/Avatars/avatar-6.png",
-    "assets/Avatars/avatar-7.png",
-    "assets/Avatars/avatar-8.png",
-    "assets/Avatars/avatar-9.png",
-  ];
-  selectedAvatar = "assets/Avatars/avatar-0.png";
+  avatars = [];
+  selectedAvatar = "";
   currentImage: number = 0;
   image = this.images[this.currentImage];
   breakAnimation: boolean = false;
@@ -52,6 +41,16 @@ export class AppComponent {
       this.images.push("assets/Images/bg-" + i + ".png");
       this.thumbnails.push("assets/Thumbnails/thumb-" + i + ".png");
     }
+
+    for(let i = 10 ; i <= 36; i++ ) {
+      this.avatars.push("assets/Avatars/avatar-"+i+".png");
+    }
+
+    let length = 0;
+    let random = Math.random();
+    length = this.avatars.length;
+    let pos = Math.round(length * random);
+    this.selectedAvatar = this.avatars[pos];
 
     this.getClock();
     
