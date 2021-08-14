@@ -3,8 +3,12 @@
 
 <body>
     <div class="container">
-        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick()" name="Saket" [avatar]="this.selectedAvatar" [city]="this.selectedCity" [weatherData]="this.weatherData" [settingClicked]="this.settingsClicked"></app-side>
-        <canvas id="canvas" width="400px" height="400px"></canvas>
+        <app-side *ngIf="this.showSide" (settingsClick)="settingsClick()" name="Saket" [avatar]="this.selectedAvatar"
+            [city]="this.selectedCity" [weatherData]="this.weatherData" [settingClicked]="this.settingsClicked">
+        </app-side>
+        <div class="canvas-container">
+            <canvas id="canvas" width="400px" height="400px"></canvas>
+        </div>
     </div>
     <div class="container overlay" (click)="closeSlideout()"></div>
     <div class="overlay-side" id="side-nav">
@@ -16,15 +20,17 @@
                             <mat-panel-title>
                                 <span class="mini-title">Weather</span>
                             </mat-panel-title>
-                            <span class="material-icons" [ngClass]="this.weatherError ? 'invalid' : 'success'" [innerHTML]="this.weatherError ? 'report_gmailerrorred' : 'verified'">
+                            <span class="material-icons" [ngClass]="this.weatherError ? 'invalid' : 'success'"
+                                [innerHTML]="this.weatherError ? 'report_gmailerrorred' : 'verified'">
                             </span>
                         </mat-expansion-panel-header>
                         <div class="weather-input-container">
                             <mat-form-field>
                                 <mat-label>City</mat-label>
-                                <input type="text" matInput [value]="this.selectedCity" (change)="updateCity($event)" placeholder="City">
+                                <input type="text" matInput [value]="this.selectedCity" (change)="updateCity($event)"
+                                    placeholder="City">
                             </mat-form-field>
-                            <span [ngClass]="this.weatherError ? 'invalid' : ''">{{this.weatherErrorText}} 
+                            <span [ngClass]="this.weatherError ? 'invalid' : ''">{{this.weatherErrorText}}
                                 <span class="bold success">{{this.city}}</span>
                             </span>
                         </div>
@@ -38,18 +44,24 @@
                         <div class="toggle-container">
                             <div class="toggle-box">
                                 <span>Auto Change Background</span>
-                                <span class="material-icons colored-toogle pointer" (click)="changeAnimation()" [innerHTML]="!this.breakAnimation ? 'toggle_on' : 'toggle_off'" [style.color]="!this.breakAnimation ? '#3F51B5' : '#9e9e9e'">
-                            </span>
+                                <span class="material-icons colored-toogle pointer" (click)="changeAnimation()"
+                                    [innerHTML]="!this.breakAnimation ? 'toggle_on' : 'toggle_off'"
+                                    [style.color]="!this.breakAnimation ? '#3F51B5' : '#9e9e9e'">
+                                </span>
                             </div>
                             <div class="toggle-box">
                                 <span>Show Information</span>
-                                <span class="material-icons colored-toogle pointer" (click)="this.showSideClick()" [innerHTML]="this.showSide ? 'toggle_on' : 'toggle_off'" [style.color]="this.showSide ? '#3F51B5' : '#9e9e9e'">
-                            </span>
+                                <span class="material-icons colored-toogle pointer" (click)="this.showSideClick()"
+                                    [innerHTML]="this.showSide ? 'toggle_on' : 'toggle_off'"
+                                    [style.color]="this.showSide ? '#3F51B5' : '#9e9e9e'">
+                                </span>
                             </div>
                             <div class="toggle-box">
                                 <span>Show Numbers</span>
-                                <span class="material-icons colored-toogle pointer" (click)="this.showNumbersClick()" [innerHTML]="this.showNumbersOnClock ? 'toggle_on' : 'toggle_off'" [style.color]="this.showNumbersOnClock ? '#3F51B5' : '#9e9e9e'">
-                            </span>
+                                <span class="material-icons colored-toogle pointer" (click)="this.showNumbersClick()"
+                                    [innerHTML]="this.showNumbersOnClock ? 'toggle_on' : 'toggle_off'"
+                                    [style.color]="this.showNumbersOnClock ? '#3F51B5' : '#9e9e9e'">
+                                </span>
                             </div>
                         </div>
                     </mat-expansion-panel>
@@ -64,14 +76,16 @@
                             <img class="selected-image" [src]="this.image" alt="selected">
                             <hr class="w-100" />
                             <div class="single-line">
-                                <img class="thumbnail pointer" *ngFor="let image of this.thumbnails; let i = index" [src]="image" (click)="selectImage(i)" alt="background">
+                                <img class="thumbnail pointer" *ngFor="let image of this.thumbnails; let i = index"
+                                    [src]="image" (click)="selectImage(i)" alt="background">
                             </div>
                             <!-- <span class="material-icons pointer" (click)="changeImageManually('previous')">skip_previous</span>
                             <span class="material-icons pointer" (click)="changeImageManually('next')">skip_next</span> -->
                             <div class="inserter w-100">
                                 <mat-form-field class="w-100">
                                     <mat-label>Background Image link</mat-label>
-                                    <input type="text" matInput [value]="this.insertImageText" (change)="insertImage($event)" placeholder="link">
+                                    <input type="text" matInput [value]="this.insertImageText"
+                                        (change)="insertImage($event)" placeholder="link">
                                 </mat-form-field>
                                 <span class="invalid" *ngIf="this.linkErrorImage?.length > 0">
                                     {{this.linkErrorImage}}
@@ -90,12 +104,14 @@
                         <div class="grid-box">
                             <img class="selected-avatar" [src]="this.selectedAvatar" alt="selected">
                             <div class="single-line-avatar">
-                                <img class="thumbnail-avatar pointer" *ngFor="let image of this.avatars" [src]="image" (click)="selectAvatar(image)" alt="avatar">
+                                <img class="thumbnail-avatar pointer" *ngFor="let image of this.avatars" [src]="image"
+                                    (click)="selectAvatar(image)" alt="avatar">
                             </div>
                             <div class="inserter w-100">
                                 <mat-form-field class="w-100">
                                     <mat-label>Avatar link</mat-label>
-                                    <input type="text" matInput [value]="this.insertAvatarText" (change)="insertAvatar($event)" placeholder="link">
+                                    <input type="text" matInput [value]="this.insertAvatarText"
+                                        (change)="insertAvatar($event)" placeholder="link">
                                 </mat-form-field>
                                 <span class="invalid" *ngIf="this.linkError?.length > 0">
                                     {{this.linkError}}
@@ -107,7 +123,9 @@
                 </mat-accordion>
             </div>
         </div>
-        <span class="material-icons pointer right-bottom mini-bg" [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()" [innerHTML]="this.settingsClicked ? 'close' : 'settings'"></span>
+        <span class="material-icons pointer right-bottom mini-bg"
+            [ngClass]="this.settingsClicked ? 'rotate' : 'anti-rotate'" (click)="settingsClick()"
+            [innerHTML]="this.settingsClicked ? 'close' : 'settings'"></span>
     </div>
 </body>
 

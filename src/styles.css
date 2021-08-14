@@ -21,7 +21,7 @@ body {
     background-blend-mode: color;
     align-items: center;
     background-attachment: fixed;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 html,
@@ -55,11 +55,24 @@ app-side .mat-expansion-panel-body {
     .container {
         flex-flow: column-reverse nowrap !important;
     }
+
     .mat-expansion-panel-content {
-        height: 350px;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: visible !important;
+        overflow-y: auto !important;
+        height: 100%;
+        max-height: calc(100vh - 150px);
+        min-height: 100%;
     }
 }
 
 .settings-panel .mat-expansion-panel-body {
     width: 100% !important;
+}
+
+mat-accordion {
+    max-width: 450px;
+    width: 90%;
+    min-width: 200px;
 }

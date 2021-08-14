@@ -9,7 +9,8 @@
                             <span class="mini-title">{{this.message}}</span>
                         </div>
                     </div>
-                    <mat-progress-bar class="margin-td-10" mode="determinate" [value]="this.progress"></mat-progress-bar>
+                    <mat-progress-bar class="margin-td-10" mode="determinate" [value]="this.progress">
+                    </mat-progress-bar>
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-accordion multi cdkDropList (cdkDropListDropped)="drop($event)">
@@ -23,7 +24,8 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="weather-container" *ngIf="panel.type == 'weather'">
-                        <img [src]="this.weatherData?.current?.condition?.icon" [alt]="this.weatherData?.condition?.text">
+                        <img [src]="this.weatherData?.current?.condition?.icon"
+                            [alt]="this.weatherData?.condition?.text">
                         <div class="weather-container-inner">
                             <span class="mini-heading">
                                 {{this.weatherData?.current?.temp_c}} °C
@@ -32,13 +34,14 @@
                                 Feels like {{this.weatherData?.current?.feelslike_c}} °C
                             </span>
                             <span class="mini-heading">
-                                {{this.weatherData?.location?.name}} , {{this.weatherData?.location?.region}} , {{this.weatherData?.location?.country}} 
+                                {{this.weatherData?.location?.name}} , {{this.weatherData?.location?.region}} ,
+                                {{this.weatherData?.location?.country}}
                             </span>
                         </div>
                     </div>
                     <div class="button-container" *ngIf="panel.type == 'weather'">
                         <button mat-fab color="primary" class="side-settings" (click)="getWeatherData()">
-                            <span class="material-icons pointer" >sync</span>
+                            <span class="material-icons pointer">sync</span>
                         </button>
                     </div>
                     <div class="weather-container" *ngIf="!this.hasWeatherData && panel.type == 'weather'">
@@ -60,7 +63,7 @@
                         <div *ngIf="this.isForecast">
                             <div class="button-container">
                                 <button mat-fab color="primary" class="side-settings" (click)="getForecastData()">
-                                    <span class="material-icons pointer" >sync</span>
+                                    <span class="material-icons pointer">sync</span>
                                 </button>
                             </div>
                         </div>
@@ -143,7 +146,10 @@
 
 
                     <!-- End of quote -->
+
+
                 </mat-expansion-panel>
+                
             </mat-accordion>
         </mat-expansion-panel>
     </mat-accordion>

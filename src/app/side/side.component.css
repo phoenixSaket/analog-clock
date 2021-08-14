@@ -4,12 +4,11 @@
 }
 
 .height-scroll {
-    max-height: 80vh;
     overflow-y: auto;
-    /* display: flex; */
     justify-content: center;
     box-shadow: 0px 0px 20px black;
-    /* margin-right: 30px; */
+    max-width: 400px;
+    width: 100%;
 }
 
 
@@ -31,7 +30,8 @@
 
 .main-display {
     height: 150px;
-    width: 400px;
+    max-width: 400px;
+    width: 100%;
 }
 
 .outer-container {
@@ -193,4 +193,13 @@
 .quote-inner {
     text-align: center;
     font-family: 'Roboto Slab', serif;
+}
+
+@media (max-width: 500px) {
+    .height-scroll {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+    }
 }

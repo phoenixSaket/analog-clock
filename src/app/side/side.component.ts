@@ -190,6 +190,4 @@ export class SideComponent implements OnInit {
     moveItemInArray(this.panelData, event.previousIndex, event.currentIndex);
   }
 
-
-
 }
