@@ -28,8 +28,8 @@ export class AppComponent {
   insertImageText: string = "";
   linkErrorImage: string = "";
   thumbnails: string[] = [];
-  showNumbers: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  showNumbersOnClock: boolean = true;
+  showNumbers: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  showNumbersOnClock: boolean = false;
 
   constructor(private service: WeatherServiceService) { }
 
@@ -85,7 +85,7 @@ export class AppComponent {
       let grad;
       ctx.beginPath();
       ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-      ctx.fillStyle = '#efefef';
+      ctx.fillStyle = '#ECECEE';
       ctx.fill();
       grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
       // grad.addColorStop(0, '#333');
@@ -95,7 +95,7 @@ export class AppComponent {
       ctx.lineWidth = radius * 0.0;
       // ctx.stroke();
       ctx.beginPath();
-      ctx.arc(0, 0, radius * 0.05, 0, 2 * Math.PI);
+      ctx.arc(0, 0, radius * 0.005, 0, 2 * Math.PI);
       // ctx.fillStyle = '#749C75';
       ctx.fillStyle = '#4545458d';
       ctx.fill();
@@ -145,15 +145,15 @@ export class AppComponent {
         (minute * Math.PI / (6 * 60)) +
         (second * Math.PI / (360 * 60));
       // drawHand(ctx, hour, radius * 0.3, radius * 0.03, "#557755");
-      drawHand(ctx, hour, radius * 0.3, radius * 0.03, "#121212");
+      drawHand(ctx, hour, radius * 0.3, radius * 0.03, "#293C4B");
       //minute
       minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
       // drawHand(ctx, minute, radius * 0.6, radius * 0.03, "#668F66");
-      drawHand(ctx, minute, radius * 0.6, radius * 0.03, "#121212");
+      drawHand(ctx, minute, radius * 0.6, radius * 0.03, "#73B9DD");
       // second
       second = (second * Math.PI / 30);
       // drawHand(ctx, second, radius * 0.95, radius * 0.01, "#749C75");
-      drawHand(ctx, second, radius * 0.95, radius * 0.01, "#121212");
+      drawHand(ctx, second, radius * 0.95, radius * 0.01, "#F3CE32");
     }
 
     function drawHand(ctx, pos, length, width, color) {
