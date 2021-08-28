@@ -14,7 +14,7 @@
 
 canvas {
     opacity: 0.85;
-    box-shadow: 0px 0px 15px black;
+    /* box-shadow: 0px 0px 15px black; */
     border-radius: 50%;
     z-index: 20;
     max-width: 400px;
@@ -383,4 +383,15 @@ app-side {
     .container {
         flex-flow: column-reverse nowrap !important;
     }
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    background-color: #abb7fa;
+    margin: 5px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px black;
+    justify-content: center;
+    align-items: center;
 }

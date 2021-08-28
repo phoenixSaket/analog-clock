@@ -42,8 +42,8 @@ export class AppComponent {
       this.thumbnails.push("assets/Thumbnails/thumb-" + i + ".png");
     }
 
-    for(let i = 10 ; i <= 36; i++ ) {
-      this.avatars.push("assets/Avatars/avatar-"+i+".png");
+    for (let i = 10; i <= 36; i++) {
+      this.avatars.push("assets/Avatars/avatar-" + i + ".png");
     }
 
     let length = 0;
@@ -53,32 +53,65 @@ export class AppComponent {
     this.selectedAvatar = this.avatars[pos];
 
     this.getClock();
-    
+
     this.changeImage(this);
 
   }
 
-  getClock( ) {
+  getClock() {
 
     let show = true;
-    this.showNumbers.subscribe(data=> {
+    this.showNumbers.subscribe(data => {
       show = data;
     })
-    
-    
+
+
     let canvas = <HTMLCanvasElement>document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
     let radius = canvas.height / 2;
-    ctx.translate(radius, radius);
-    radius = radius * 1;
+    // ctx.translate(radius, radius);
     setInterval(drawClock, 1000);
+    let check = 0;
 
     function drawClock() {
-      drawFace(ctx, radius);
+      ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+      ctx.fillStyle = '#CDCDCDaa';
+      // ctx.fill();
+
+      // if (check === 0) {
+      drawFace2(ctx, radius);
+      check++;
+      // }
+
       if (show) {
         drawNumbers(ctx, radius);
       }
       drawTime(ctx, radius);
+    }
+
+    function drawFace2(ctx, radius) {
+
+      ctx.beginPath();
+      ctx.save();
+
+      if (check === 0) {
+        ctx.translate(radius, radius);
+        ctx.moveTo(0, 0 - radius)
+      }
+      for (let i = 0; i < 6; i++) {
+        ctx.rotate(Math.PI / 6);
+        ctx.lineTo(0, 0 - (radius * 0.95));
+        ctx.rotate(Math.PI / 6);
+        ctx.lineTo(0, 0 - (radius));
+      }
+      ctx.strokeStyle = '#ECECEE';
+      ctx.lineWidth = 5;
+      ctx.closePath();
+      ctx.fillStyle = '#ECECEE';
+      ctx.fill();
+      ctx.strokeStyle = '#CDCDCD';
+      ctx.lineWidth = 7;
+      ctx.stroke();
     }
 
     function drawFace(ctx, radius) {
@@ -298,8 +331,8 @@ export class AppComponent {
   showNumbersClick() {
 
     let show = true;
-    this.showNumbers.subscribe(data=>{
-      show= data;
+    this.showNumbers.subscribe(data => {
+      show = data;
     })
 
     this.showNumbersOnClock = !show;
@@ -308,5 +341,5 @@ export class AppComponent {
     // this.getClock();
   }
 
-  
+
 }
