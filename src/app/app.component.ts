@@ -151,7 +151,7 @@ export class AppComponent {
         ctx.translate(0, radius * 0.85);
         ctx.rotate(-ang);
       }
-      ctx.fillStyle = '#000';
+      ctx.fillStyle = '#000000';
       ctx.font = radius * 0.1 + "px Cabin";
       for (num = 1; num < 13; num++) {
         ang = num * Math.PI / 6;
@@ -164,7 +164,7 @@ export class AppComponent {
         ctx.translate(0, radius * 0.85);
         ctx.rotate(-ang);
       }
-      ctx.fill();
+      // ctx.fill();
     }
 
     function drawTime(ctx, radius) {
